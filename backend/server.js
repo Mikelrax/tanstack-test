@@ -12,8 +12,7 @@ app.use(express.json());
 
 app.get("/client/:id", async (req, res) => {
     const { id } = req.params;
-
-    // Simula una consulta con retraso de 3 segundos
+    console.log("llamando cliente con id", id)
     setTimeout(() => {
         const client = clients[id];
 
@@ -21,12 +20,15 @@ app.get("/client/:id", async (req, res) => {
             return res.status(404).json({ error: "Cliente no encontrado" });
         }
 
-        res.json(cliente);
-    }, 3000);
+        res.json(client);
+        console.log("client", client);
+    }, 1);
 });
 
-app.get("/clientes", async (req, res) => {
-    res.json(clients);
+app.get("/clients", async (req, res) => {
+    setTimeout(() => {
+        res.json(clients);
+    }, 3000);
 });
 
 app.get("/", (req, res) => {
